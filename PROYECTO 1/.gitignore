@@ -1,0 +1,16 @@
+# Builds (CMake)
+build/
+build/**
+Backend/build/
+Backend/build/**
+
+# Discos generados
+Backend/disks/
+Backend/disks/**
+*.mia
+
+# Binarios
+*.o
+*.obj
+*.out
+app
