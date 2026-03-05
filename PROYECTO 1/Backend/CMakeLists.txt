@@ -24,6 +24,19 @@ add_executable(app
     src/commands/rmusr.cpp
     src/commands/mkfile.cpp
     src/commands/mkdir.cpp
+    src/commands/exec.cpp
+
+    src/commands/rep.cpp
+    src/reports/mbr_report.cpp
+    src/reports/disk_report.cpp
+    src/reports/inode_report.cpp
+    src/reports/block_report.cpp
+    src/reports/bm_inode_report.cpp
+    src/reports/bm_bloc_report.cpp
+    src/reports/tree_report.cpp
+    src/reports/file_report.cpp
+    src/reports/sb_report.cpp
+    src/reports/ls_report.cpp
 )
 
 target_include_directories(app PRIVATE include)

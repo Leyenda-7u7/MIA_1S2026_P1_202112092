@@ -19,6 +19,10 @@
 #include "commands/mkfile.hpp"
 #include "commands/mkdir.hpp"
 
+#include "commands/exec.hpp"
+
+#include "commands/rep.hpp"
+
 static std::string toLower(std::string s) {
     std::transform(s.begin(), s.end(), s.begin(),
                    [](unsigned char c){ return std::tolower(c); });
@@ -443,6 +447,40 @@ std::string executeLine(const std::string& line) {
         return outMsg;
     }
     
+    // =========================================================
+    // EXEC (SCRIPT)
+    // =========================================================
+    if (cmdName == "exec") {
+        ParsedCommand pc = parseCommand(line, {"-path"});
+        if (!pc.unknown.empty()) return "Error: parámetro no reconocido en exec.";
+
+        std::string path = pc.params.count("-path") ? pc.params["-path"] : "";
+        if (path.empty()) return "Error: exec requiere -path.";
+
+        if (!cmd::execScript(path, outMsg)) return outMsg;
+        return outMsg;
+    }
+
+    // =========================================================
+    // REP
+    // =========================================================
+    if (cmdName == "rep") {
+        ParsedCommand pc = parseCommand(line, {"-name","-path","-id","-path_file_ls"});
+        if (!pc.unknown.empty()) return "Error: parámetro no reconocido en rep.";
+
+        std::string name = pc.params.count("-name") ? pc.params["-name"] : "";
+        std::string path = pc.params.count("-path") ? pc.params["-path"] : "";
+        std::string id   = pc.params.count("-id")   ? pc.params["-id"]   : "";
+        std::string pfl  = pc.params.count("-path_file_ls") ? pc.params["-path_file_ls"] : "";
+
+        if (name.empty() || path.empty() || id.empty()) {
+            return "Error: rep requiere -name, -path, -id.";
+        }
+
+        if (!cmd::rep(toLower(name), path, id, pfl, outMsg)) return outMsg;
+        return outMsg;
+    }
+        
     // =========================================================
     // SALIR
     // =========================================================

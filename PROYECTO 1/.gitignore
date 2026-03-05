@@ -1,16 +1,26 @@
-# Builds (CMake)
+# build de cmake
 build/
-build/**
 Backend/build/
-Backend/build/**
 
-# Discos generados
-Backend/disks/
-Backend/disks/**
+# discos simulados
 *.mia
+Backend/disks/
 
-# Binarios
-*.o
-*.obj
+# reportes generados
+reports/
+Backend/reports/
+
+# ejecutables
 *.out
+*.exe
 app
+
+# archivos temporales
+*.log
+*.tmp
+
+# vscode
+.vscode/
+
+# linux
+*.swp
