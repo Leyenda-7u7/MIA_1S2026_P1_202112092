@@ -6,9 +6,7 @@ Backend/build/
 *.mia
 Backend/disks/
 
-# reportes generados
-reports/
-Backend/reports/
+
 
 # ejecutables
 *.out

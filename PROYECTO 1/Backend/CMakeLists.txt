@@ -4,8 +4,12 @@ project(Proyecto1Backend LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(app
-    src/main.cpp
+# ===============================
+# Librería del backend
+# ===============================
+
+add_library(core
+
     src/DiskManager.cpp
     src/ext2/Bitmap.cpp
     src/CommandParser.cpp
@@ -27,6 +31,7 @@ add_executable(app
     src/commands/exec.cpp
 
     src/commands/rep.cpp
+
     src/reports/mbr_report.cpp
     src/reports/disk_report.cpp
     src/reports/inode_report.cpp
@@ -39,4 +44,24 @@ add_executable(app
     src/reports/ls_report.cpp
 )
 
-target_include_directories(app PRIVATE include)
+target_include_directories(core PUBLIC include src)
+
+# ===============================
+# Ejecutable CLI (tu consola actual)
+# ===============================
+
+add_executable(app
+    src/main.cpp
+)
+
+target_link_libraries(app core)
+
+# ===============================
+# Ejecutable servidor API
+# ===============================
+
+add_executable(server
+    src/server/server.cpp
+)
+
+target_link_libraries(server core)
